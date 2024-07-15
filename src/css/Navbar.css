@@ -1,0 +1,16 @@
+.navbar {
+	height: 5 rem;
+	position: sticky;
+	top: 0;
+    background-color: white;
+	z-index: 1000;
+}
+
+.fa-compass {
+	color: #fe424d;
+	font-size: 2rem;
+}
+
+.nav-link {
+	color: #222 !important;
+}

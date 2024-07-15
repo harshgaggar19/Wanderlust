@@ -1,21 +1,25 @@
 import React from 'react'
-import Index from '.'
 import Show from './Show'
 import {BrowserRouter as Router,Route, Routes, Navigate } from 'react-router-dom'
-import index from '.'
+import Listings from './Listings'
 import New from './New'
 import Edit from './Edit'
+import Layout from './Layout'
+import ErrorPage from './Error'
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Navigate to="/listings"/>}/>
-        <Route path='/listings' Component={index}/>
-        <Route path='/listings/new' Component={New}/>
-        <Route path='/listings/:id' Component={Show} />
-        <Route path='/listings/:id/edit' Component={Edit} />
-      </Routes>
-    </Router>
-  )
+		<Router>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Listings />} />
+					<Route path="listings/new" element={<New />} />
+					<Route path="listings/:id" element={<Show />} />
+					<Route path="listings/:id/edit" element={<Edit />} />
+				</Route>
+				<Route path="*" element={<Navigate to="/listings" />} />
+				<Route path="/error" element={<ErrorPage />} />
+			</Routes>
+		</Router>
+	);
 }

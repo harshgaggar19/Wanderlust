@@ -1,12 +1,11 @@
 import { Navigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import "./index.css";
 
 
 export default function New() {
 	const navigate = useNavigate();
-	const [redirect, setRedirect] = useState(false);
 	let [formData, setFormData] = useState({
 		title: "",
 		description: "",
@@ -15,44 +14,60 @@ export default function New() {
 		location: "",
 		country: "",
 	});
+
+	useEffect(() => {
+		
+
+		// Fetch all the forms we want to apply custom Bootstrap validation styles to
+		const forms = document.querySelectorAll(".needs-validation");
+
+		// Loop over them and prevent submission
+		Array.from(forms).forEach((form) => {
+			form.addEventListener(
+				"submit",
+				(event) => {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+
+					form.classList.add("was-validated");
+				},
+				false
+			);
+		});
+	}, []);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			// console.log("submitting form data");
-			// let response = await fetch("http://localhost:8080/listings/new", {
-			// 	method: "post",
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// 	body: JSON.stringify(formData),
-			// });
-			// console.log(response);
+			console.log("submitting form data");
+			let response = await fetch("http://localhost:8080/listings/new", {
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+			console.log(response);
 
-			// console.log("Response status:", response.status);
-			// const responseData = await response.json();
-			// console.log("Response data:", responseData);
+			console.log("Response status:", response.status);
+			const responseData = await response.json();
+			console.log("Response data:", responseData);
 
-			axios
-				.post("http://localhost:8080/listings/new", formData)
-				.then((response) => {
-					console.log("hello")
-					console.log("Form data sent successfully:", response.data);
-					// Handle response if needed
-				})
-				.catch((error) => {
-					console.error("An error occurred while sending form data:", error);
-					// Handle error if needed
-				});
-
-			// if (response.ok) {
-			// 	console.log("form data submitted");
-			// 	setRedirect(true);
-			// 	navigate("/listings");
-			// } else {
-			// 	console.log("error in form submission");
-			// }
+			if (response.ok) {
+				console.log("form data submitted");
+				navigate("/listings");
+			}
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(errorData.message);
+			}
+			else {
+				console.log("error in form submission");
+			}
 		} catch (err) {
-			console.log(err);
+			navigate("/error",{state:{errorMessage: err.message}})
 		}
 	};
 
@@ -64,63 +79,118 @@ export default function New() {
 		});
 	};
 
-	if (redirect) {
-		return navigate("/listings");
-	}
-
 	return (
-		<div>
-			<h1>Create New listing</h1>
-			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					name="title"
-					placeholder="enter title"
-					value={formData.title}
-					onChange={handleOnChange}
-				/>
-				<br />
-				<textarea
-					name="description"
-					placeholder="enter description"
-					value={formData.description}
-					onChange={handleOnChange}
-				></textarea>
-				<br />
-				<input
-					type="text"
-					name="image"
-					placeholder="enter image"
-					value={formData.image}
-					onChange={handleOnChange}
-				/>
-				<br />
-				<input
-					name="price"
-					placeholder="enter price"
-					type="number"
-					value={formData.price}
-					onChange={handleOnChange}
-				/>
-				<br />
-				<input
-					type="text"
-					name="country"
-					placeholder="enter country"
-					value={formData.country}
-					onChange={handleOnChange}
-				/>
-				<br />
-				<input
-					type="text"
-					name="location"
-					placeholder="enter location"
-					value={formData.location}
-					onChange={handleOnChange}
-				/>
-				<br />
-				<button type="submit">Add</button>
-			</form>
+		<div className="container">
+			<div className="row mt-3">
+				<div className="col-8 offset-2">
+					<h1>Create New listing</h1>
+					<form onSubmit={handleSubmit} noValidate className="needs-validation">
+						<div className="mb-3">
+							<label htmlFor="title" className="form-label m-0">
+								Title:
+							</label>
+							<input
+								type="text"
+								name="title"
+								placeholder="enter title"
+								value={formData.title}
+								onChange={handleOnChange}
+								className="form-control"
+								required
+							/>
+							<div className="valid-feedback">Title looks good!</div>
+						</div>
+						<div className="mb-3">
+							<label htmlFor="description" className="form-label m-0">
+								Description:
+							</label>
+							<textarea
+								name="description"
+								placeholder="enter description"
+								value={formData.description}
+								onChange={handleOnChange}
+								className="form-control"
+								required
+							></textarea>
+							<div className="invalid-feedback">
+								Please enter a short description
+							</div>
+						</div>
+
+						<div className="mb-3">
+							<label htmlFor="image" className="form-label m-0">
+								Image:
+							</label>
+							<input
+								type="text"
+								name="image"
+								placeholder="enter image"
+								value={formData.image}
+								onChange={handleOnChange}
+								className="form-control"
+							/>
+							<div className="invalid-feedback">Link address should be valid</div>
+						</div>
+						<div className="row">
+							<div className="mb-3 col-md-4">
+								<label htmlFor="price" className="form-label m-0">
+									Price:
+								</label>
+								<input
+									name="price"
+									placeholder="enter price"
+									type="number"
+									value={formData.price}
+									onChange={handleOnChange}
+									className="form-control"
+									required
+								/>
+								<div className="invalid-feedback">Price should be valid</div>
+							</div>
+
+							<div className="mb-3 col-md-8">
+								<label htmlFor="country" className="form-label m-0">
+									Country:
+								</label>
+								<input
+									type="text"
+									name="country"
+									placeholder="enter country"
+									value={formData.country}
+									onChange={handleOnChange}
+									className="form-control"
+									required
+								/>
+								<div className="invalid-feedback">
+									Country name should be valid
+								</div>
+							</div>
+						</div>
+
+						<div className="mb-3">
+							<label htmlFor="location" className="form-label m-0">
+								Location:
+							</label>
+							<input
+								type="text"
+								name="location"
+								placeholder="enter location"
+								value={formData.location}
+								onChange={handleOnChange}
+								className="form-control"
+								required
+							/>
+							<div className="invalid-feedback">Location should be valid</div>
+						</div>
+
+						<button type="submit" className="btn btn-dark add-btn">
+							Add
+						</button>
+						<br />
+						<br />
+					</form>
+				</div>
+			</div>
 		</div>
 	);
 }
