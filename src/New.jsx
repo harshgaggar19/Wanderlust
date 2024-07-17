@@ -91,8 +91,8 @@ export default function New() {
 							</label>
 							<input
 								type="text"
-								name="title"
 								placeholder="enter title"
+								name="title"
 								value={formData.title}
 								onChange={handleOnChange}
 								className="form-control"
