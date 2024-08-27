@@ -43,11 +43,11 @@ export default function New() {
 		try {
 			console.log("submitting form data");
 			let response = await fetch("http://localhost:8080/listings/new", {
-				method: "post",
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(formData),
+				body: JSON.stringify({ listing: formData }),
 			});
 			console.log(response);
 

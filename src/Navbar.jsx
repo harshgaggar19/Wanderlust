@@ -7,7 +7,7 @@ export default function Navbar() {
 			<nav className="navbar navbar-expand-md bg-body-light border-bottom ">
 				<div className="container-fluid">
 					<a className="navbar-brand" href="/">
-						<i class="fa-regular fa-compass"></i>
+						<i className="fa-regular fa-compass"></i>
 					</a>WanderLust
 					<button
 						className="navbar-toggler"

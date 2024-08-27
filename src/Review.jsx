@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Review() {
 	const location = useLocation();
-	const navigate = useNavigate();
 	const [formData2, setFormData2] = useState({
 		review: {
 			rating: "3",
@@ -13,10 +11,8 @@ export default function Review() {
 	});
 
 	useEffect(() => {
-		// Fetch all the forms we want to apply custom Bootstrap validation styles to
 		const forms = document.querySelectorAll(".needs-validation");
 
-		// Loop over them and prevent submission
 		Array.from(forms).forEach((form) => {
 			form.addEventListener(
 				"submit",
@@ -25,7 +21,6 @@ export default function Review() {
 						event.preventDefault();
 						event.stopPropagation();
 					}
-
 					form.classList.add("was-validated");
 				},
 				false
@@ -37,6 +32,7 @@ export default function Review() {
 		e.preventDefault();
 		try {
 			console.log("submitting form data");
+			console.log(location.pathname)
 			let response = await fetch(
 				`http://localhost:8080${location.pathname}/reviews`,
 				{
@@ -47,27 +43,23 @@ export default function Review() {
 					body: JSON.stringify(formData2),
 				}
 			);
-			console.log(response);
-
-			console.log("Response status:", response.status);
-			const responseData = await response.json();
-			console.log("Response data:", responseData);
 
 			if (response.ok) {
 				console.log("form data submitted");
+				e.target.classList.remove("was-validated");
 				setFormData2({
 					review: {
 						rating: "3",
 						comment: "",
 					},
 				});
-				navigate(`${location.pathname}`);
+				window.location.reload();
 			} else {
 				const errorData = await response.json();
 				throw new Error(errorData.message);
 			}
 		} catch (err) {
-			navigate("/error", { state: { errorMessage: err.message } });
+			console.log(err);
 		}
 	};
 
@@ -83,7 +75,7 @@ export default function Review() {
 	};
 
 	return (
-		<div className="col-8 offset-3 container">
+		<div className="col-md-8 offset-md-3 container mb-3">
 			<h4>Leave a Review</h4>
 			<form onSubmit={handleSubmit2} noValidate className="needs-validation">
 				<div className="mb-3 mt-3">
@@ -115,9 +107,7 @@ export default function Review() {
 						className="form-control"
 						required
 					></textarea>
-					<div className="invalid-feedback">
-						Please submit a valid review.
-					</div>
+					<div className="invalid-feedback">Please submit a valid review.</div>
 				</div>
 				<button type="submit" className="btn btn-outline-dark">
 					Submit

@@ -24,8 +24,6 @@ export default function Show() {
 			}
 		};
 		fetchListings();
-
-		
 	}, []);
 
 	if (loading) {
@@ -54,13 +52,31 @@ export default function Show() {
 			console.log(err);
 		}
 	};
+	const handleReviewDelete = async (e,review_id) => {
+		e.preventDefault();
+		try {
+			let response = await fetch(`http://localhost:8080/listings/${id}/reviews/${review_id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+			const responseData = await response.json();
+			console.log("deleted listing:", responseData);
+			if (response.ok) {
+				window.location.reload();
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	return (
 		<div className="container">
 			<div className="row mt-3">
 				<div className="col-8 offset-3">
 					<h1>Listing details</h1>
 				</div>
-				<div className="card col-6 offset-3">
+				<div className="card listing-card col-6 offset-3">
 					<img
 						src={`${listing.image.url}`}
 						className="card-img-top show-img"
@@ -93,7 +109,7 @@ export default function Show() {
 						Edit
 					</a>
 					<form onSubmit={handleSubmit}>
-						<button type="submit" className="btn btn-dark  offset-4">
+						<button type="submit" className="btn btn-dark offset-4 ">
 							Delete
 						</button>
 					</form>
@@ -102,8 +118,23 @@ export default function Show() {
 				<Review />
 
 				<hr />
-				<h4>All listings</h4>
-				<p>{listing.reviews}</p>
+				<div className="all-reviews col-8 offset-3">
+					<h4>All listings</h4>
+					<div className="row">
+						{listing.review.map((listing, index) => (
+							<div className="card col-5 mx-3 mb-3" key={index}>
+								<div className="card-body">
+									<h5 className="card-title">Jane doe</h5>
+									<p className="card-text">{listing.comment}</p>
+									<p className="card-text">{listing.rating} stars</p>
+									<form onClick={(e)=> handleReviewDelete(e,listing._id)} className="mb-2">
+										<button className="btn btn-sm btn-dark">Delete</button>
+									</form>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

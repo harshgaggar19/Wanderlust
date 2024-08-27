@@ -26,9 +26,13 @@ export default function Listings() {
 	return (
 		<div className="container">
 			<div className="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
-				{allListings.map((listing) => (
-					<a href={`listings/${listing._id}`} className="listing-link">
-						<div className="card col">
+				{allListings.map((listing, index) => (
+					<a
+						href={`listings/${listing._id}`}
+						className="listing-link"
+						key={index}
+					>
+						<div className="card col listing-card">
 							<img
 								src={`${listing.image.url}`}
 								className="card-img-top"

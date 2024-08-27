@@ -17,7 +17,7 @@ export default function App() {
 					<Route path="listings/:id" element={<Show />} />
 					<Route path="listings/:id/edit" element={<Edit />} />
 				</Route>
-				<Route path="*" element={<Navigate to="/listings" />} />
+				<Route path="*" element={<Navigate to="/" />} />
 				<Route path="/error" element={<ErrorPage />} />
 			</Routes>
 		</Router>
