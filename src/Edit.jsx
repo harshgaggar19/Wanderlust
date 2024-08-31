@@ -85,7 +85,9 @@ export default function Edit() {
 
 			if (response.ok) {
 				console.log("form data updated");
-				navigate(`/listings/${id}`);
+				navigate(`/listings/${id}`, {
+					state: { message: responseData.success[0] },
+				});
 			}
 			if (!response.ok) {
 				const errorData = await response.json();

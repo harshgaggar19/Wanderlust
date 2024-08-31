@@ -13,7 +13,27 @@ import localStrategy from "passport-local";
 import User from "./models/user.js";
 import listings from "./routes/listing.js"
 import reviews from "./routes/review.js"
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import flash from "connect-flash";
 
+const sessionOptions = {
+	secret: "mysupersecretcode",
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+		maxAge: 7 * 24 * 60 * 60 * 1000,
+		httpOnly: true,
+	},
+};
+
+app.use(session(sessionOptions));
+app.use(flash());
+app.use((req, res, next) => {
+	res.locals.success = req.flash("success");
+	next();
+})
 app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));

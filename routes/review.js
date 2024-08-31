@@ -32,9 +32,9 @@ router.post(
 
 		await newReview.save();
 		await listing.save();
-
+		req.flash("success", "New Review Created!!");
 		console.log("new review saved");
-		res.status(201).json(newReview);
+		res.status(201).json({newReview:newReview,success:req.flash("success")});
 	})
 );
 
@@ -50,8 +50,8 @@ router.delete(
 		);
 		await Review.findByIdAndDelete(reviewId);
 		console.log(newListing);
-
-		res.status(201).json("deleted");
+		req.flash("success", "Review Deleted!!");
+		res.status(201).json(req.flash("success"));
 	})
 );
 

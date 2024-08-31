@@ -39,8 +39,9 @@ router.post(
     wrapAsync(async (req, res, next) => {
 		const newListing = new Listing(req.body.listing);
 		await newListing.save();
+		req.flash("success", "New Listing created!!");
 		console.log("New listing created:", newListing);
-		res.status(201).json(newListing);
+		res.status(201).json({newListing:newListing,success:req.flash("success")});
 	})
 );
 
@@ -64,7 +65,8 @@ router.patch(
 		const upadatedListing = await Listing.findByIdAndUpdate(id, req.body, {
 			new: true,
 		});
-		res.status(201).json(upadatedListing);
+		req.flash("success", "Listing Updated!!");
+		res.status(201).json({upadatedListing: upadatedListing,success:req.flash("success")});
 	})
 );
 
@@ -74,8 +76,9 @@ router.delete(
 	wrapAsync(async (req, res) => {
 		let { id } = req.params;
 		const deletedListing = await Listing.findByIdAndDelete(id);
+		req.flash("success", "Listing Deleted!!");
 		console.log(deletedListing);
-		res.status(201).json(deletedListing);
+		res.status(201).json({deletedListing:deletedListing,success:req.flash("success")});
 	})
 );
 

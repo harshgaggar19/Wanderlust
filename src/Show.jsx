@@ -6,10 +6,18 @@ import { useLocation } from "react-router-dom";
 export default function Show() {
 	const navigate = useNavigate();
 	const location = useLocation();
+	let initialMessage = location.state?.message || null;
+	const [message, setMessage] = useState(initialMessage);
 	const { id } = useParams();
 
 	const [listing, setListing] = useState({});
 	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		if (message) {
+			navigate(location.pathname, { replace: true, state: {} });
+		}
+	}, [message, navigate, location.pathname]);
 
 	useEffect(() => {
 		let fetchListings = async () => {
@@ -31,7 +39,7 @@ export default function Show() {
 	}
 
 	if (!listing) {
-		return <div>Error loading data</div>;
+		navigate("/error",{state:{errorMessage:"Listing not Found"}})
 	}
 
 	const handleSubmit = async (e) => {
@@ -46,7 +54,7 @@ export default function Show() {
 			const responseData = await response.json();
 			console.log("deleted listing:", responseData);
 			if (response.ok) {
-				navigate("/listings");
+				navigate("/listings",{state:{message:responseData.success[0]}});
 			}
 		} catch (err) {
 			console.log(err);
@@ -64,6 +72,7 @@ export default function Show() {
 			const responseData = await response.json();
 			console.log("deleted listing:", responseData);
 			if (response.ok) {
+				navigate(`/listings/${id}`, { state: { message: responseData[0] } });
 				window.location.reload();
 			}
 		} catch (err) {
@@ -72,6 +81,18 @@ export default function Show() {
 	};
 	return (
 		<div className="container">
+			{message && (
+				<div className="alert alert-success alert-dismissible fade show col-6 offset-3">
+					{message}
+					<button
+						type="button"
+						className="btn-close"
+						data-bs-dismiss="alert"
+						aria-label="Close"
+						onClick={() => setMessage(null)}
+					></button>
+				</div>
+			)}
 			<div className="row mt-3">
 				<div className="col-8 offset-3">
 					<h1>Listing details</h1>
@@ -115,7 +136,7 @@ export default function Show() {
 					</form>
 				</div>
 				<hr />
-				<Review />
+				<Review id={id } />
 
 				<hr />
 				<div className="all-reviews col-8 offset-3">
@@ -127,7 +148,10 @@ export default function Show() {
 									<h5 className="card-title">Jane doe</h5>
 									<p className="card-text">{listing.comment}</p>
 									<p className="card-text">{listing.rating} stars</p>
-									<form onClick={(e)=> handleReviewDelete(e,listing._id)} className="mb-2">
+									<form
+										onClick={(e) => handleReviewDelete(e, listing._id)}
+										className="mb-2"
+									>
 										<button className="btn btn-sm btn-dark">Delete</button>
 									</form>
 								</div>

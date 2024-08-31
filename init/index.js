@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import initData from "../init/data.js";
 import Listing from "../models/listing.js";
+import Review from "../models/review.js";
 
 main()
 	.then((res) => {
@@ -13,7 +14,8 @@ async function main() {
 }
 
 const initDB = async () => {
-    await Listing.deleteMany({});
+	await Listing.deleteMany({});
+	await Review.deleteMany({});
     await Listing.insertMany(initData.data);
     console.log("data was initialized");
 

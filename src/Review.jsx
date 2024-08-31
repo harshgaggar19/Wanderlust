@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
-export default function Review() {
+export default function Review({id}) {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const [formData2, setFormData2] = useState({
 		review: {
 			rating: "3",
@@ -43,6 +44,7 @@ export default function Review() {
 					body: JSON.stringify(formData2),
 				}
 			);
+			const responseData = await response.json();
 
 			if (response.ok) {
 				console.log("form data submitted");
@@ -53,7 +55,12 @@ export default function Review() {
 						comment: "",
 					},
 				});
+				console.log(id)
+				navigate(`/listings/${id}`, {
+					state: { message: responseData.success[0] },
+				});
 				window.location.reload();
+
 			} else {
 				const errorData = await response.json();
 				throw new Error(errorData.message);

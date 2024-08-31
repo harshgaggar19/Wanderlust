@@ -49,23 +49,21 @@ export default function New() {
 				},
 				body: JSON.stringify({ listing: formData }),
 			});
-			console.log(response);
-
-			console.log("Response status:", response.status);
 			const responseData = await response.json();
-			console.log("Response data:", responseData);
-
+			// console.log("Response data:", responseData);
+			
 			if (response.ok) {
+				console.log("success",responseData.success[0]);
 				console.log("form data submitted");
-				navigate("/listings");
+				navigate("/listings", {
+					state: { message: responseData.success[0] },
+				});
 			}
 			if (!response.ok) {
 				const errorData = await response.json();
 				throw new Error(errorData.message);
 			}
-			else {
-				console.log("error in form submission");
-			}
+			
 		} catch (err) {
 			navigate("/error",{state:{errorMessage: err.message}})
 		}
@@ -129,7 +127,9 @@ export default function New() {
 								onChange={handleOnChange}
 								className="form-control"
 							/>
-							<div className="invalid-feedback">Link address should be valid</div>
+							<div className="invalid-feedback">
+								Link address should be valid
+							</div>
 						</div>
 						<div className="row">
 							<div className="mb-3 col-md-4">
