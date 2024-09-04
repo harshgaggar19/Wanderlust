@@ -6,6 +6,8 @@ import New from './New'
 import Edit from './Edit'
 import Layout from './Layout'
 import ErrorPage from './Error'
+import Signup from './Signup'
+import Login from './Login'
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
 					<Route path="listings/new" element={<New />} />
 					<Route path="listings/:id" element={<Show />} />
 					<Route path="listings/:id/edit" element={<Edit />} />
+					<Route path="/users/signup" element={<Signup />} />
+					<Route path="/users/login" element={<Login />} />
 				</Route>
 				<Route path="*" element={<Navigate to="/" />} />
 				<Route path="/error" element={<ErrorPage />} />

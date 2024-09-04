@@ -7,10 +7,13 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    /*passportLocalMongoose automatically creates a username and password field along with hashing 
+    and salting so even if you dont provide it it will automatically get created.*/
 })
+
+userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", userSchema);
 
-// User.plugin(passportLocalMongoose);
 
 export default User;

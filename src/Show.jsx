@@ -11,7 +11,6 @@ export default function Show() {
 	const { id } = useParams();
 
 	const [listing, setListing] = useState({});
-	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		if (message) {
@@ -25,18 +24,13 @@ export default function Show() {
 				let response = await fetch(`http://localhost:8080/listings/${id}`);
 				let result = await response.json();
 				setListing(result);
-				setLoading(false);
 			} catch (err) {
 				console.error(err);
-				setLoading(false);
 			}
 		};
 		fetchListings();
 	}, []);
 
-	if (loading) {
-		return <div>Loading...</div>;
-	}
 
 	if (!listing) {
 		navigate("/error",{state:{errorMessage:"Listing not Found"}})

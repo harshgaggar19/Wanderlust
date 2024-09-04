@@ -8,6 +8,7 @@ export default function Listings() {
 	const [message, setMessage] = useState(initialMessage);
 	const [allListings, setAllListings] = useState([]);
 
+	//to remove the alert when the page is refreshed
 	useEffect(() => {
 		if (message) {
 			navigate(location.pathname, { replace: true, state: {} });

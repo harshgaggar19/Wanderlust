@@ -26,6 +26,7 @@ router.get("/", (req, res) => {
 	Listing.find({})
 		.then((allListings) => {
 			// console.log(allListings);
+			console.log("listings:",req.user);
 			res.json(allListings);
 		})
 		.catch((err) => {

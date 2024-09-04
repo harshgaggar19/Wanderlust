@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useBootstrapBreakpoints } from "react-bootstrap/esm/ThemeProvider";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import useBootstrapValidation from "./utils/useBootstrapValidation";
 
 export default function Edit() {
 	const navigate = useNavigate();
@@ -12,36 +14,14 @@ export default function Edit() {
 		title: "",
 		description: "",
 		image: {
-			url:""
+			url: "",
 		},
 		price: "",
 		location: "",
 		country: "",
 	});
 
-	useEffect(() => {
-		"use strict";
-
-		// Fetch all the forms we want to apply custom Bootstrap validation styles to
-		const forms = document.querySelectorAll(".needs-validation");
-
-		// Loop over them and prevent submission
-		Array.from(forms).forEach((form) => {
-			form.addEventListener(
-				"submit",
-				(event) => {
-					if (!form.checkValidity()) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-
-					form.classList.add("was-validated");
-				},
-				false
-			);
-		});
-	}, []);
-
+	useBootstrapValidation();
 
 	useEffect(() => {
 		let fetchListings = async () => {
@@ -53,7 +33,7 @@ export default function Edit() {
 					title: result.title || "",
 					description: result.description || "",
 					image: {
-						url:result.image.url || ""
+						url: result.image.url || "",
 					},
 					price: result.price || "",
 					location: result.location || "",
@@ -157,7 +137,9 @@ export default function Edit() {
 								className="form-control"
 								required
 							/>
-							<div className="invalid-feedback">Please enter a valid link address</div>
+							<div className="invalid-feedback">
+								Please enter a valid link address
+							</div>
 						</div>
 						<div className="row">
 							<div className="mb-3 col-4">
