@@ -1,0 +1,36 @@
+.icon-bar-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.icon-bar {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.icon-item {
+  display: inline-block;
+  width: 80px;
+  margin: 0 15px;
+  text-align: center;
+}
+
+.icon-item i {
+  font-size: 24px;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.icon-item span {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+}
+
+.icon-item:hover {
+  cursor: pointer;
+  color: #fe424d;
+}
+
