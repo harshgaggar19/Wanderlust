@@ -191,7 +191,7 @@ export default function Show() {
 						<div className="row">
 							{listing.review && listing.review.length ? (
 								listing.review.map((listing, index) => (
-									<div className="card col-5 mx-3 mb-3" key={index}>
+									<div className="card col-10 mx-3 mb-3" key={index}>
 										<div className="card-body">
 											<h5 className="card-title">{listing.author.username}</h5>
 											<p
