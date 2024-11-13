@@ -18,6 +18,15 @@ export const getListings = wrapAsync(async (req, res) => {
 	res.json(allListings);
 });
 
+export const mylistings = wrapAsync(async (req, res) => {
+	try {
+		const listings = await Listing.find({ owner: req.userID });
+		res.json(listings);
+	} catch (error) {
+		res.status(500).json({ message: "Server error" });
+	}
+})
+
 export const newListing = wrapAsync(async (req, res, next) => {
 	let response = await geocodingClient
 		.forwardGeocode({

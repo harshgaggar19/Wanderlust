@@ -1,8 +1,8 @@
 export const filterData = [
 	{
 		icon: "fa-star",
-		title: "Icons",
-		value: "icons",
+		title: "Luxury",
+		value: "luxury",
 	},
 	{
 		icon: "fa-swimming-pool",

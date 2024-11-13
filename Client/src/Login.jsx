@@ -96,7 +96,7 @@ const Login = () => {
 								required
 							/>
 						</div>
-						
+
 						<div className="mb-3">
 							<label htmlFor="password" className="form-label m-0">
 								Password:
@@ -111,6 +111,15 @@ const Login = () => {
 								required
 							/>
 						</div>
+						<div>
+							Dont have an account?{" "}
+							<b>
+								<a href="/users/signup" className="navbar-brand">
+									Signup
+								</a>{" "}
+							</b>
+						</div>
+						<br />
 						<button type="submit" className="btn btn-dark edit-btn">
 							Login
 						</button>

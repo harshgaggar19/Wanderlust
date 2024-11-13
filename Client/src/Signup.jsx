@@ -113,6 +113,16 @@ const Signup = () => {
 								required
 							/>
 						</div>
+						<div>
+							Already have an account?{" "}
+							<b>
+								<a href="/users/login" className="navbar-brand">
+									Login
+								</a>{" "}
+							</b>
+						</div>
+						<br />
+
 						<button type="submit" className="btn btn-dark edit-btn">
 							Sign Up
 						</button>

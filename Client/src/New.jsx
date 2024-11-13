@@ -74,9 +74,7 @@ export default function New() {
 						console.log(imageResponse.data);
 						throw new Error("Image upload failed");
 					} else {
-						navigate("/listings", {
-							state: { message: responseData.success[0] },
-						});
+						
 						console.log(imageResponse.data);
 					}
 				}
@@ -84,6 +82,10 @@ export default function New() {
 				const errorData = responseData;
 				throw new Error(errorData.message);
 			}
+			navigate("/listings", {
+				state: { message: responseData.success[0] },
+			});
+			console.log("hello")
 		} catch (err) {
 			navigate("/error", { state: { errorMessage: err.message } });
 		}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./css/Navbar.css";
 import { useNavigate } from "react-router-dom";
-import Search from "./components/Search";
 
 export default function Navbar() {
 	let navigate = useNavigate();
@@ -28,10 +27,18 @@ export default function Navbar() {
 		<div>
 			<nav className="navbar navbar-expand-md bg-body-light border-bottom ">
 				<div className="container-fluid">
-					<a className="navbar-brand" href="/">
+					<a className="navbar-brand" href="/listings">
 						<i className="fa-regular fa-compass"></i>
 					</a>
-					WanderLust
+					<span
+						style={{ fontWeight: "500", fontSize: "3vh", marginRight: "5px" }}
+					>
+						{" "}
+						<a className="navbar-brand" href="/listings">
+							{" "}
+							WanderLust
+						</a>
+					</span>
 					<button
 						className="navbar-toggler"
 						type="button"
@@ -44,20 +51,17 @@ export default function Navbar() {
 						<div className="navbar-nav d-flex w-100  justify-content-between align-items-center">
 							<div className="d-flex">
 								<a className="nav-link " href="/listings">
-									Home
-								</a>
-								<a className="nav-link" href="/listings">
-									All listings
+									Explore
 								</a>
 							</div>
 							{/* <Search/> */}
-							<div className="d-flex">
+							<div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
 								<a className="nav-link" href="/listings/new">
 									Add New Listing
 								</a>
 								{!authorized ? (
-									<div className="d-flex ">
-										<a className="nav-link " href="/users/login">
+									<div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
+										<a className="nav-link justify-center" href="/users/login">
 											Login
 										</a>
 
@@ -66,7 +70,10 @@ export default function Navbar() {
 										</a>
 									</div>
 								) : (
-									<div>
+									<div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
+										<a className="nav-link" href="/listings/mylistings">
+											My Listings
+										</a>
 										<a
 											className="nav-link"
 											href="/users/logout"

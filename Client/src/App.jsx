@@ -16,6 +16,7 @@ import ErrorPage from "./Error";
 import Signup from "./Signup";
 import Login from "./Login";
 import PrivateRoute from "./utils/PrivateRoute";
+import MyListings from "./MyListings";
 
 export default function App() {
 	const [authorized, setAuthorized] = useState(false);
@@ -64,6 +65,14 @@ export default function App() {
 						element={
 							<PrivateRoute>
 								<Edit />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="listings/mylistings"
+						element={
+							<PrivateRoute>
+								<MyListings />
 							</PrivateRoute>
 						}
 					/>

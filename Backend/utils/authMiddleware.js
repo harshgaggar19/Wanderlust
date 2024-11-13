@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-// import {JWT_SECRET} from "../config.js"
 
 export function authMiddleware(req, res, next) {
 	const auth = req.headers.authorization;

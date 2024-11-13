@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate,useOutletContext } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Filter from "./components/Filter";
+import Spinner from "./components/Spinner";
 
 export default function Listings() {
 	const location = useLocation();
@@ -108,7 +109,7 @@ export default function Listings() {
 						))
 					) : (
 						<h2>No lisitngs found!</h2>
-					): <h5>Loading....</h5>}
+					): <Spinner/>}
 				</div>
 			</div>
 		</>
