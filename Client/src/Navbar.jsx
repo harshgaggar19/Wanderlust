@@ -71,9 +71,9 @@ export default function Navbar() {
 									</div>
 								) : (
 									<div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
-										<a className="nav-link" href="/listings/mylistings">
+										{/* <a className="nav-link" href="/listings/mylistings">
 											My Listings
-										</a>
+										</a> */}
 										<a
 											className="nav-link"
 											href="/users/logout"

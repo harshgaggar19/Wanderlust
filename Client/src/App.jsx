@@ -68,14 +68,14 @@ export default function App() {
 							</PrivateRoute>
 						}
 					/>
-					<Route
+					{/* <Route
 						path="listings/mylistings"
 						element={
 							<PrivateRoute>
 								<MyListings />
 							</PrivateRoute>
 						}
-					/>
+					/> */}
 					<Route path="/users/signup" element={<Signup />} />
 					<Route path="/users/login" element={<Login />} />
 				</Route>
