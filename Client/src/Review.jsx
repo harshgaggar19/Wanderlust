@@ -22,7 +22,7 @@ export default function Review({id}) {
 			
 			const token = localStorage.getItem("token");
 			let response = await fetch(
-				`https://wanderlust-harshgaggar.onrender.com${location.pathname}/reviews`,
+				`https://wanderlust-backend-harsh.onrender.com${location.pathname}/reviews`,
 				{
 					method: "post",
 					headers: {

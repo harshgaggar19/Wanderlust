@@ -33,7 +33,7 @@ export default function App() {
 
 	// const getUser = async () => {
 	// 	try {
-	// 		const url = "https://wanderlust-harshgaggar.onrender.com/auth/login/success";
+	// 		const url = "https://wanderlust-backend-harsh.onrender.com/auth/login/success";
 	// 		const { data } = await axios.get(url, { withCredentials: true })
 	// 		setUser(data.user._json)
 	// 		console.log(data);

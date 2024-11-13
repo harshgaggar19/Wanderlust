@@ -20,7 +20,7 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			let response = await fetch(
-				"https://wanderlust-harshgaggar.onrender.com/users/signup",
+				"https://wanderlust-backend-harsh.onrender.com/users/signup",
 				{
 					method: "POST",
 					headers: {

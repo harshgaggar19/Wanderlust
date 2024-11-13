@@ -39,7 +39,7 @@ export default function Show() {
 			try {
 				setLoading(true);
 				let response = await fetch(
-					`https://wanderlust-harshgaggar.onrender.com/listings/${id}`
+					`https://wanderlust-backend-harsh.onrender.com/listings/${id}`
 				);
 				let result = await response.json();
 				setListing(result);
@@ -59,7 +59,7 @@ export default function Show() {
 		e.preventDefault();
 		try {
 			let response = await fetch(
-				`https://wanderlust-harshgaggar.onrender.com/listings/${id}`,
+				`https://wanderlust-backend-harsh.onrender.com/listings/${id}`,
 				{
 					method: "DELETE",
 					headers: {
@@ -80,7 +80,7 @@ export default function Show() {
 		e.preventDefault();
 		try {
 			let response = await fetch(
-				`https://wanderlust-harshgaggar.onrender.com/listings/${id}/reviews/${review_id}`,
+				`https://wanderlust-backend-harsh.onrender.com/listings/${id}/reviews/${review_id}`,
 				{
 					method: "DELETE",
 					headers: {

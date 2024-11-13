@@ -25,7 +25,7 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			let response = await fetch(
-				"https://wanderlust-harshgaggar.onrender.com/users/login",
+				"https://wanderlust-backend-harsh.onrender.com/users/login",
 				{
 					method: "POST",
 					headers: {

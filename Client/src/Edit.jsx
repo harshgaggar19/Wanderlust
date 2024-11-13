@@ -27,7 +27,7 @@ export default function Edit() {
 		let fetchListings = async () => {
 			try {
 				let response = await fetch(
-					`https://wanderlust-harshgaggar.onrender.com/listings/${id}`
+					`https://wanderlust-backend-harsh.onrender.com/listings/${id}`
 				);
 				let result = await response.json();
 				setListing(result);
@@ -54,7 +54,7 @@ export default function Edit() {
 		try {
 			console.log("updating form data");
 			let response = await fetch(
-				`https://wanderlust-harshgaggar.onrender.com/listings/${id}/edit`,
+				`https://wanderlust-backend-harsh.onrender.com/listings/${id}/edit`,
 				{
 					method: "PATCH",
 					headers: {

@@ -45,7 +45,7 @@ export default function Listings() {
 			console.log(filter)
 			try {
 				const response = await fetch(
-					`https://wanderlust-harshgaggar.onrender.com/listings?filter=${filter}`
+					`https://wanderlust-backend-harsh.onrender.com/listings?filter=${filter}`
 				);
 				if (!response.ok) {
 					throw new Error("Network response was not ok");

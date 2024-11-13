@@ -41,7 +41,7 @@ export default function New() {
 
 		try {
 			let response = await fetch(
-				"https://wanderlust-harshgaggar.onrender.com/listings/new",
+				"https://wanderlust-backend-harsh.onrender.com/listings/new",
 				{
 					method: "POST",
 					headers: {
@@ -60,7 +60,7 @@ export default function New() {
 					formDataForImage.append("image", imageFile);
 
 					let imageResponse = await fetch(
-						`https://wanderlust-harshgaggar.onrender.com/listings/new/${responseData.newListing._id}/upload-image`,
+						`https://wanderlust-backend-harsh.onrender.com/listings/new/${responseData.newListing._id}/upload-image`,
 						{
 							method: "POST",
 							headers: {

@@ -12,10 +12,10 @@ const MyListings = () => {
 				const token = localStorage.getItem("token");
 
 				const response = await axios.get(
-					`https://wanderlust-harshgaggar.onrender.com/listings/my-listings`,
+					`https://wanderlust-backend-harsh.onrender.com/listings/my-listings`,
 					{
 						headers: {
-                            Authorization: `Bearer ${token}`,
+							Authorization: `Bearer ${token}`,
 						},
 					}
 				);
