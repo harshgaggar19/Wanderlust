@@ -5,8 +5,8 @@ const port = process.env.PORT || 8080;
 import mongoose from "mongoose";
 import cors from "cors";
 import ExpressError from "./utils/ExpressError.js";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+// import passport from "passport";
+// import { Strategy as LocalStrategy } from "passport-local";
 import listingsRouter from "./routes/listingsRouter.js";
 import reviewsRouter from "./routes/reviewRouter.js";
 import usersRouter from "./routes/usersRouter.js";
@@ -40,6 +40,7 @@ const sessionOptions = {
 		path:"/"
 	},
 };
+app.use(session(sessionOptions));
 
 app.use(cors());
 
@@ -57,7 +58,6 @@ async function main() {
 	await mongoose.connect(process.env.MONGO_URL);
 }
 
-app.use(session(sessionOptions));
 
 // app.use(passport.initialize()); //Initializes Passpport
 // app.use(passport.session()); //to keep a track of user that the use which has already logged in is not trying to access the page or not i.e. session handling

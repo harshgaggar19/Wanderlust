@@ -22,6 +22,7 @@ export default function App() {
 	const [authorized, setAuthorized] = useState(false);
 
 	const token = localStorage.getItem("token");
+	console.log(token);
 
 	useEffect(() => {
 		if (token) {
